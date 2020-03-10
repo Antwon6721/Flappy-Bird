@@ -16,14 +16,16 @@ import java.awt.Rectangle;
  * @author 641580
  */
 public abstract class Sprite {
-    private int height, width, x, y;
+    private int height, width, x, y, score;
     private double vx, vy;
     private Rectangle bounds;
     private Color color;
     private int speed;
+     private boolean alive = true;
     
       public Sprite(int speed,int x, int y, double vx, double vy, int width, int height, Color color) {
         this.speed = speed;
+        this.score = 0;
         this.x = x;
         this.y = y;
         this.vy = vy;
@@ -32,6 +34,14 @@ public abstract class Sprite {
         this.height = height;
         this.color = color;
         this.bounds = new Rectangle(this.x, this.y, this.width, this.height);
+    }
+      
+    public int getScore() {
+        return score;
+    }
+
+    public void setScore(int score) {
+        this.score = score;
     }
 
     public int getHeight() {
@@ -48,6 +58,14 @@ public abstract class Sprite {
 
     public void setWidth(int width) {
         this.width = width;
+    }
+    
+    public void die() {
+        this.alive = false;
+    }
+     
+    public boolean isAlive() {
+        return alive;
     }
 
     public int getX() {
@@ -84,13 +102,6 @@ public abstract class Sprite {
         this.vy = vy;
     }
     
-    public Rectangle getBounds() {
-        return bounds;
-    }
-
-    public void setBounds(Rectangle bounds) {
-        this.bounds = bounds;
-    }
 
     public Color getColor() {
         return color;
@@ -101,12 +112,43 @@ public abstract class Sprite {
         this.color = color;
     }
     
+    public void collideWorldBounds(int cWidth, int cHeight) {
+        if (this.y <= 0) {
+            this.vy = 0;
+            this.y++;
+        }
+        if (this.y + this.height >= cHeight) {
+            this.vy = 0;
+            this.y = cHeight - this.height;
+        }
+    }
+    
+    public Rectangle getBounds() {
+        return bounds;
+    }
+     
+     public void collide(Sprite topPipe, Sprite bottomPipe) {
+        if (this.bounds.intersects(topPipe.getBounds()) || this.bounds.intersects(bottomPipe.getBounds())) {
+            this.vx = 0;
+            this.vy = 0;
+            topPipe.vx = 0;
+            bottomPipe.vx = 0;
+            this.die();
+        }
+        if(topPipe.x == this.x){
+           System.out.println("Pass");
+           this.setScore(this.getScore() + 1);
+        }
+    }
+    
     public void update() {
         x += vx;
         y += vy;
         if (x < -100) {
             x = 1600;
         }
+        
+      this.bounds = new Rectangle(x, y, width, height);
     }
     public abstract void draw(Graphics g);
     

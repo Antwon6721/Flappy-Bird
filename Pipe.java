@@ -19,7 +19,7 @@ public class Pipe extends Sprite{
     private ImageIcon ii;
     private Image img;
     private static final int SPEED = 3;
-    private static final Color COLOR = Color.RED;
+    private static final Color COLOR = Color.WHITE;
 
  
     public Pipe(int x , int y, boolean topPipe) {

@@ -34,15 +34,22 @@ public class World extends JPanel{
     
     @Override
     public void paintComponent(Graphics g) {
+        
         super.paintComponent(g);
         this.setBackground(Color.BLACK);
-        topPipe.draw(g); 
         topPipe.update();
-        bottomPipe.draw(g); 
+        topPipe.draw(g);
         bottomPipe.update();
-        bird.draw(g); 
-        bird.gravity();
-        bird.update();
+        bottomPipe.draw(g);
+        g.drawString("" + bird.getScore(), 200, 200);
+        if(bird.isAlive() == true){
+            bird.gravity();
+            bird.collideWorldBounds(1440,840);
+            bird.collide(topPipe, bottomPipe);
+            bird.update();
+            bird.draw(g);
+        }
+    
     }
     private class ScheduleTask extends TimerTask {
         @Override
@@ -54,6 +61,7 @@ public class World extends JPanel{
     public void keyPressed(KeyEvent e) {
         if (e.getKeyCode() == KeyEvent.VK_SPACE) {
             bird.setVy(-8);
+            bird.setY(bird.getY() - 1);
         }
     }
 }
