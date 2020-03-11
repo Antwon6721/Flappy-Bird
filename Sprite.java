@@ -28,8 +28,8 @@ public abstract class Sprite {
         this.score = 0;
         this.x = x;
         this.y = y;
-        this.vy = 0;
-        this.vx = 0;
+        this.vy = vy;
+        this.vx = vx;
         this.width = width;
         this.height = height;
         this.color = color;
