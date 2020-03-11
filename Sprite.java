@@ -28,8 +28,8 @@ public abstract class Sprite {
         this.score = 0;
         this.x = x;
         this.y = y;
-        this.vy = vy;
-        this.vx = vx;
+        this.vy = 0;
+        this.vx = 0;
         this.width = width;
         this.height = height;
         this.color = color;
@@ -135,7 +135,7 @@ public abstract class Sprite {
             bottomPipe.vx = 0;
             this.die();
         }
-        if(topPipe.x == this.x){
+        if(topPipe.x + topPipe.width == this.x){
            System.out.println("Pass");
            this.setScore(this.getScore() + 1);
         }
