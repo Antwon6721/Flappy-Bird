@@ -34,6 +34,9 @@ public class Bird extends Sprite{
      public void draw(Graphics g) {
          g.setColor(super.getColor());
         g.drawImage(img, super.getX(), super.getY(), super.getWidth(), super.getHeight(), null);
+        if(super.d > 0){
+            g.drawString("Would You like to play again press SPACE", 465, 500);
+        }
     }
     
     public void gravity() {

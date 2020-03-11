@@ -21,7 +21,8 @@ public abstract class Sprite {
     private Rectangle bounds;
     private Color color;
     private int speed;
-     private boolean alive = true;
+    boolean alive = true;
+    int d = 0;
     
       public Sprite(int speed,int x, int y, double vx, double vy, int width, int height, Color color) {
         this.speed = speed;
@@ -62,6 +63,7 @@ public abstract class Sprite {
     
     public void die() {
         this.alive = false;
+        d++;
     }
      
     public boolean isAlive() {
@@ -126,7 +128,7 @@ public abstract class Sprite {
     public Rectangle getBounds() {
         return bounds;
     }
-     
+    
      public void collide(Sprite topPipe, Sprite bottomPipe) {
         if (this.bounds.intersects(topPipe.getBounds()) || this.bounds.intersects(bottomPipe.getBounds())) {
             this.vx = 0;
