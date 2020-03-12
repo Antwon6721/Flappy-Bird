@@ -10,6 +10,7 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.Rectangle;
+import javax.swing.ImageIcon;
 
 /**
  *
@@ -23,6 +24,8 @@ public abstract class Sprite {
     private int speed;
     boolean alive = true;
     int d = 0;
+    private ImageIcon ii;
+    private Image img;
     
       public Sprite(int speed,int x, int y, double vx, double vy, int width, int height, Color color) {
         this.speed = speed;
@@ -34,7 +37,9 @@ public abstract class Sprite {
         this.width = width;
         this.height = height;
         this.color = color;
-        this.bounds = new Rectangle(this.x, this.y, this.width, this.height);
+        this.bounds = new Rectangle(this.x, this.y, this.width, this.height); 
+        ii = new ImageIcon(getClass().getResource("Game Over.png"));
+        img = ii.getImage();
     }
       
     public int getScore() {
@@ -142,6 +147,7 @@ public abstract class Sprite {
            this.setScore(this.getScore() + 1);
         }
     }
+     
     
     public void update() {
         x += vx;

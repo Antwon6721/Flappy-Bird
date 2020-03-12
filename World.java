@@ -25,6 +25,8 @@ public class World extends JPanel{
     private Pipe bottomPipe;
     private ImageIcon ii;
     private Image img;
+     private ImageIcon yy;
+    private Image im;
     
     public World() {
         timer = new Timer();
@@ -34,6 +36,8 @@ public class World extends JPanel{
         bottomPipe = new Pipe(1600, 550, false);
         ii = new ImageIcon(getClass().getResource("Background.png"));
         img = ii.getImage();
+        yy = new ImageIcon(getClass().getResource("Game Over.png"));
+        im = yy.getImage();
     }
     
     @Override
@@ -46,19 +50,22 @@ public class World extends JPanel{
         topPipe.draw(g);
         bottomPipe.update();
         bottomPipe.draw(g);
-       
+        bird.draw(g);
         if(bird.isAlive() == true){
             bird.gravity();
             bird.collideWorldBounds(1440,840);
             bird.collide(topPipe, bottomPipe);
             bird.update();
-            bird.draw(g);
+            
         }
         g.setColor(new Color(0, 125, 0));
         g.fillRoundRect(40, 35, 73, 21, 8, 8);
         g.fillRoundRect(40, 35, 73 + (int) Math.log10(bird.getScore()) * 7, 21, 8, 8);
         g.setColor(new Color(255, 255, 255));
         g.drawString("SCORE: " + bird.getScore(), 50, 50);
+       if (bird.isAlive() == false){
+            g.drawImage(im, 500, 350, 300, 100, null);
+       }
     }
     private class ScheduleTask extends TimerTask {
         @Override

@@ -20,6 +20,7 @@ public class Bird extends Sprite{
     
     private ImageIcon ii;
     private Image img;
+    
     private static final int SPEED = 3;
     private static final Color COLOR = Color.WHITE;
 
@@ -27,7 +28,6 @@ public class Bird extends Sprite{
         super(SPEED, x, y, 0, -4, 51, 36, COLOR);
         ii = new ImageIcon(getClass().getResource("Bird.png"));
         img = ii.getImage();
-    
     }
     
     @Override
@@ -35,7 +35,9 @@ public class Bird extends Sprite{
          g.setColor(super.getColor());
         g.drawImage(img, super.getX(), super.getY(), super.getWidth(), super.getHeight(), null);
         if(super.d > 0){
-            g.drawString("Would You like to play again press SPACE", 465, 500);
+            g.setColor(new Color(0, 0, 0));
+            g.drawString("Would You like to play again press SPACE", 530, 465);
+            
         }
     }
     
