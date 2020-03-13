@@ -25,7 +25,7 @@ public class World extends JPanel{
     private Pipe bottomPipe;
     private ImageIcon ii;
     private Image img;
-     private ImageIcon yy;
+    private ImageIcon yy;
     private Image im;
     
     public World() {
@@ -78,6 +78,17 @@ public class World extends JPanel{
         if (e.getKeyCode() == KeyEvent.VK_SPACE) {
             bird.setVy(-8);
             bird.setY(bird.getY() - 1);
+        }
+        if(bird.alive == false){
+            if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+                bird.setY(350);
+                topPipe.setX(1600);
+                bottomPipe.setX(1600);
+                topPipe.setVx(-5);
+                bottomPipe.setVx(-5);
+                bird.setAlive(true);
+                bird.setScore(0);
+            }
         }
     }
 }

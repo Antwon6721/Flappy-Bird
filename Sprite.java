@@ -68,12 +68,18 @@ public abstract class Sprite {
     
     public void die() {
         this.alive = false;
-        d++;
+        
     }
      
     public boolean isAlive() {
         return alive;
     }
+
+    public void setAlive(boolean alive) {
+        this.alive = alive;
+    }
+    
+    
 
     public int getX() {
         return x;
